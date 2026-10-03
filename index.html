@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Play Job Service</title>
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', '1790684428719160');
+  fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1790684428719160&ev=PageView&noscript=1">
+  </noscript>
+  <!-- End Meta Pixel -->
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background: #07111f;
+      color: #fff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    /* Creative Image */
+    .creative {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+    }
+
+    .card {
+      padding: 25px 20px;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #d1d5db;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .features {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .feature {
+      padding: 11px 13px;
+      margin: 7px 0;
+      border-radius: 10px;
+      background: rgba(255,255,255,.07);
+      font-size: 14px;
+    }
+
+    .timer {
+      color: #cbd5e1;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+
+    .timer strong {
+      color: #fff;
+      font-size: 20px;
+    }
+
+    #joinButton {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      border-radius: 12px;
+      background: #229ED9;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #joinButton:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .note {
+      margin-top: 13px;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- YOUR CREATIVE IMAGE -->
+    <img
+      src="165831.jpg"
+      alt="Playboy Creative"
+      class="creative"
+    >
+
+    <div class="card">
+
+      <h1>Play Job Service</h1>
+
+      <p class="subtitle">
+        Latest job updates, opportunities and important information
+        directly on our Telegram channel.
+      </p>
+
+      <div class="features">
+        <div class="feature">✅ Latest Job Updates</div>
+        <div class="feature">✅ New Job Opportunities</div>
+        <div class="feature">✅ Important Notifications</div>
+        <div class="feature">✅ Fast & Regular Updates</div>
+      </div>
+
+      <div class="timer">
+        Please wait <strong id="countdown">10</strong> seconds...
+      </div>
+
+      <button id="joinButton" type="button" disabled>
+        🚀 Join Play Job Service on Telegram
+      </button>
+
+      <p class="note">
+        Tap the button above to continue to Telegram.
+      </p>
+
+    </div>
+  </div>
+
+
+  <script>
+    const TELEGRAM_URL = "https://t.me/+YijDu89OvTYyYWJl";
+    const STORAGE_KEY = "pjs_valid_telegram_click";
+
+    const button = document.getElementById("joinButton");
+    const countdown = document.getElementById("countdown");
+
+    const pageLoadedAt = performance.now();
+
+    let seconds = 10;
+    let redirected = false;
+
+    /* 10 second timer — NO Subscribe event */
+    const timer = setInterval(() => {
+      seconds--;
+
+      if (seconds > 0) {
+        countdown.textContent = seconds;
+      } else {
+        clearInterval(timer);
+        countdown.textContent = "Ready";
+        button.disabled = false;
+      }
+    }, 1000);
+
+
+    /*
+      Previous valid button click detected:
+      next landing-page visit -> 300ms redirect
+    */
+    let alreadyClicked = false;
+
+    try {
+      alreadyClicked =
+        localStorage.getItem(STORAGE_KEY) === "1";
+    } catch (e) {
+      alreadyClicked = false;
+    }
+
+    if (alreadyClicked) {
+      setTimeout(() => {
+        if (!redirected) {
+          redirected = true;
+          window.location.href = TELEGRAM_URL;
+        }
+      }, 300);
+    }
+
+
+    /*
+      Subscribe event ONLY on valid button click.
+      Timer par event fire nahi hoga.
+    */
+    button.addEventListener("click", function () {
+
+      /* First 0.8 second click = invalid */
+      const elapsed = performance.now() - pageLoadedAt;
+
+      if (elapsed < 800) {
+        return;
+      }
+
+      /* Prevent repeated clicks */
+      if (redirected) {
+        return;
+      }
+
+      redirected = true;
+
+      /* ONLY BUTTON CLICK */
+      if (typeof fbq === "function") {
+        fbq("track", "Subscribe");
+      }
+
+      /* Remember valid click */
+      try {
+        localStorage.setItem(STORAGE_KEY, "1");
+      } catch (e) {}
+
+      /* Redirect after 300ms */
+      setTimeout(() => {
+        window.location.href = TELEGRAM_URL;
+      }, 300);
+
+    });
+  </script>
+
+</body>
+</html>
