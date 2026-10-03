@@ -6,253 +6,319 @@
 
   <title>Play Job Service</title>
 
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel Code -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
+    !function(f,b,e,v,n,t,s)
+    {
+      if(f.fbq)return;
+      n=f.fbq=function(){
+        n.callMethod ?
+        n.callMethod.apply(n,arguments) :
+        n.queue.push(arguments)
+      };
 
-  fbq('init', '1790684428719160');
-  fbq('track', 'PageView');
+      if(!f._fbq)f._fbq=n;
+
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+
+      t=b.createElement(e);
+      t.async=!0;
+      t.src=v;
+
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(
+      window,
+      document,
+      'script',
+      'https://connect.facebook.net/en_US/fbevents.js'
+    );
+
+    fbq('init', '1790684428719160');
+    fbq('track', 'PageView');
   </script>
 
   <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1790684428719160&ev=PageView&noscript=1">
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1790684428719160&ev=PageView&noscript=1"
+      alt=""
+    >
   </noscript>
-  <!-- End Meta Pixel -->
 
   <style>
     * {
       box-sizing: border-box;
+    }
+
+    html,
+    body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
+      font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        linear-gradient(
+          135deg,
+          #050505,
+          #151515,
+          #050505
+        );
+
+      color: #ffffff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       min-height: 100vh;
       padding: 15px;
-      font-family: Arial, sans-serif;
-      background: #07111f;
-      color: #fff;
     }
 
-    .container {
+    .page {
       width: 100%;
-      max-width: 480px;
-      margin: auto;
-    }
-
-    /* Creative Image */
-    .creative {
-      width: 100%;
-      display: block;
-      border-radius: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 12px 35px rgba(0,0,0,.35);
-    }
-
-    .card {
-      padding: 25px 20px;
+      max-width: 520px;
       text-align: center;
-      border-radius: 20px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
     }
 
-    h1 {
+    .title {
       font-size: 28px;
-      margin-bottom: 8px;
+      font-weight: 800;
+      margin: 0 0 10px;
+      line-height: 1.2;
     }
 
     .subtitle {
-      color: #d1d5db;
+      font-size: 15px;
+      color: #cfcfcf;
+      margin-bottom: 22px;
       line-height: 1.5;
-      margin-bottom: 18px;
     }
 
-    .features {
-      text-align: left;
-      margin-bottom: 18px;
-    }
-
-    .feature {
-      padding: 11px 13px;
-      margin: 7px 0;
-      border-radius: 10px;
-      background: rgba(255,255,255,.07);
+    .timer-box {
+      margin: 0 0 15px;
       font-size: 14px;
+      color: #dcdcdc;
     }
 
-    .timer {
-      color: #cbd5e1;
-      font-size: 14px;
-      margin: 16px 0;
-    }
-
-    .timer strong {
-      color: #fff;
-      font-size: 20px;
+    #countdown {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
     }
 
     #joinButton {
       width: 100%;
-      min-height: 52px;
-      border: 0;
-      border-radius: 12px;
-      background: #229ED9;
-      color: #fff;
+      border: none;
+      border-radius: 14px;
+
+      padding: 17px 18px;
+
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 800;
+
+      color: #ffffff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #229ed9,
+          #168dcc
+        );
+
       cursor: pointer;
+
+      box-shadow:
+        0 8px 25px rgba(34,158,217,0.30);
+
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
     }
 
-    #joinButton:disabled {
-      opacity: .55;
-      cursor: not-allowed;
+    #joinButton:hover {
+      transform: translateY(-1px);
+    }
+
+    #joinButton:active {
+      transform: scale(0.98);
     }
 
     .note {
       margin-top: 13px;
-      color: #9ca3af;
       font-size: 12px;
+      color: #999999;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      #joinButton {
+        font-size: 16px;
+        padding: 16px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="page">
 
-    <!-- YOUR CREATIVE IMAGE -->
-    <img
-      src="165831.jpg"
-      alt="Playboy Creative"
-      class="creative"
-    >
-
-    <div class="card">
-
-      <h1>Play Job Service</h1>
-
-      <p class="subtitle">
-        Latest job updates, opportunities and important information
-        directly on our Telegram channel.
-      </p>
-
-      <div class="features">
-        <div class="feature">✅ Latest Job Updates</div>
-        <div class="feature">✅ New Job Opportunities</div>
-        <div class="feature">✅ Important Notifications</div>
-        <div class="feature">✅ Fast & Regular Updates</div>
-      </div>
-
-      <div class="timer">
-        Please wait <strong id="countdown">10</strong> seconds...
-      </div>
-
-      <button id="joinButton" type="button" disabled>
-        🚀 Join Play Job Service on Telegram
-      </button>
-
-      <p class="note">
-        Tap the button above to continue to Telegram.
-      </p>
-
+    <div class="title">
+      Play Job Service
     </div>
-  </div>
 
+    <div class="subtitle">
+      Join our Telegram channel to continue.
+    </div>
+
+    <div class="timer-box">
+      Redirecting in
+      <strong id="countdown">10</strong>
+      seconds...
+    </div>
+
+    <button id="joinButton" type="button">
+      🚀 Join Play Job Service on Telegram
+    </button>
+
+    <div class="note">
+      Click the button to continue to Telegram.
+    </div>
+
+  </main>
 
   <script>
-    const TELEGRAM_URL = "https://t.me/+YijDu89OvTYyYWJl";
-    const STORAGE_KEY = "pjs_valid_telegram_click";
 
-    const button = document.getElementById("joinButton");
-    const countdown = document.getElementById("countdown");
+    const TELEGRAM_URL =
+      "https://t.me/+YijDu89OvTYyYWJl";
 
-    const pageLoadedAt = performance.now();
+    const pageLoadedAt =
+      performance.now();
 
-    let seconds = 10;
+    const button =
+      document.getElementById("joinButton");
+
+    const countdown =
+      document.getElementById("countdown");
+
     let redirected = false;
+    let seconds = 10;
 
-    /* 10 second timer — NO Subscribe event */
-    const timer = setInterval(() => {
+
+    /* =========================
+       10 SECOND AUTO REDIRECT
+       ========================= */
+
+    const timer = setInterval(function () {
+
       seconds--;
 
-      if (seconds > 0) {
-        countdown.textContent = seconds;
-      } else {
+      countdown.textContent = seconds;
+
+      if (seconds <= 0) {
+
         clearInterval(timer);
-        countdown.textContent = "Ready";
-        button.disabled = false;
+
+        /*
+          Automatic redirect par
+          Subscribe event FIRE NAHI HOGA.
+        */
+
+        if (!redirected) {
+
+          redirected = true;
+
+          window.location.href =
+            TELEGRAM_URL;
+        }
       }
+
     }, 1000);
 
 
-    /*
-      Previous valid button click detected:
-      next landing-page visit -> 300ms redirect
-    */
-    let alreadyClicked = false;
+    /* =========================
+       BUTTON CLICK
+       ========================= */
 
-    try {
-      alreadyClicked =
-        localStorage.getItem(STORAGE_KEY) === "1";
-    } catch (e) {
-      alreadyClicked = false;
-    }
+    button.addEventListener(
+      "click",
+      function () {
 
-    if (alreadyClicked) {
-      setTimeout(() => {
-        if (!redirected) {
-          redirected = true;
-          window.location.href = TELEGRAM_URL;
+        const elapsed =
+          performance.now() - pageLoadedAt;
+
+        /*
+          First 0.8 second ka click ignore.
+        */
+
+        if (elapsed < 800) {
+          return;
         }
-      }, 300);
-    }
+
+        /*
+          Agar timer already redirect
+          kar chuka hai to event nahi.
+        */
+
+        if (redirected) {
+          return;
+        }
+
+        redirected = true;
 
 
-    /*
-      Subscribe event ONLY on valid button click.
-      Timer par event fire nahi hoga.
-    */
-    button.addEventListener("click", function () {
+        /*
+          Subscribe sirf button click par.
+        */
 
-      /* First 0.8 second click = invalid */
-      const elapsed = performance.now() - pageLoadedAt;
+        if (typeof fbq === "function") {
 
-      if (elapsed < 800) {
-        return;
+          fbq(
+            "track",
+            "Subscribe"
+          );
+
+        }
+
+
+        /*
+          Button click ke 300ms baad
+          Telegram redirect.
+        */
+
+        setTimeout(function () {
+
+          window.location.href =
+            TELEGRAM_URL;
+
+        }, 300);
+
       }
+    );
 
-      /* Prevent repeated clicks */
-      if (redirected) {
-        return;
-      }
-
-      redirected = true;
-
-      /* ONLY BUTTON CLICK */
-      if (typeof fbq === "function") {
-        fbq("track", "Subscribe");
-      }
-
-      /* Remember valid click */
-      try {
-        localStorage.setItem(STORAGE_KEY, "1");
-      } catch (e) {}
-
-      /* Redirect after 300ms */
-      setTimeout(() => {
-        window.location.href = TELEGRAM_URL;
-      }, 300);
-
-    });
   </script>
 
 </body>
